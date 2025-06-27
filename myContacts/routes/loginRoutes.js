@@ -5,6 +5,7 @@ const {
   loginUser,
   getRegister,
   registerAdmin,
+  logout,
 } = require("../controllers/loginController");
 
 
@@ -18,5 +19,8 @@ router
   .get(getRegister)
   .post(registerAdmin);
 
+router
+  .route("/logout")
+  .get(logout);
 
 module.exports = router;

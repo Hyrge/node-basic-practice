@@ -57,5 +57,14 @@ const loginUser = asyncHandler( async (req, res) => {
   //   res.send("fail...")
   // }
 })
-module.exports = {getLogin, loginUser, getRegister, registerAdmin};
+
+
+// logOut get
+const logout = (req, res) => {
+  res.clearCookie("token"); // 쿠키 삭제
+  res.redirect("/"); // 홈으로 리다이렉트
+};
+
+
+module.exports = {getLogin, loginUser, getRegister, registerAdmin, logout,};
 // Register check POST};
