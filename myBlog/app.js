@@ -14,8 +14,10 @@ dbConnect();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 
-// app.use("/", require("./routes/loginRoutes"));
+
+app.use("/", require("./routes/main"));
 // app.use("/contacts", require("./routes/contactRoutes"));
+
 
 // 서버 실행
 app.listen(port, () => {
