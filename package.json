@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/gunrein620/node-kseb/issues"
   },
-  "homepage": "https://github.com/gunrein620/node-kseb#readme"
+  "homepage": "https://github.com/gunrein620/node-kseb#readme",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express-async-handler": "^1.2.0",
+    "mongodb": "^6.17.0",
+    "mongoose": "^8.16.1"
+  }
 }

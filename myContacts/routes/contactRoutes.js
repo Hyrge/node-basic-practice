@@ -1,34 +1,40 @@
 const express = require("express");
 const router = express.Router();
+
+const cookieParser = require("cookie-parser");
+const checkLogin = require("../middleware/checkLogin");
+
 const {
-      getAllContacts,
-       creatContact,
-       getContact,
-       updateContact,
-       deleteContact,
-       addContactForm,
-       updateContactForm
-      }
-      = require("../controllers/contactController")
+  getAllContacts,
+  creatContact,
+  getContact,
+  updateContact,
+  deleteContact,
+  addContactForm,
+  updateContactForm
+} = require("../controllers/contactController")
+
+router.use(cookieParser());
 
 // 모든 연락처 가져오기
 // router.route("/contacts")
-router.route("/")
-.get(getAllContacts) // 읽기 
-.post(creatContact); // 생성하기
+router
+.route("/")
+.get(checkLogin, getAllContacts) // 로그인 체크
+// .post(creatContact); // 생성하기
 
 //연락처 추가하기 
 router
 .route("/add")
-.get(addContactForm)
-.post(creatContact) // 생성하기
-.post(updateContactForm);
+.get(checkLogin, addContactForm)
+.post(checkLogin, creatContact) // 생성하기
+// .post(updateContactForm);
 
 // 연락처 수정하기 : route("/contacts/:id")
 router
 .route("/:id")
-.get(getContact) //수정하기 
-.put(updateContact)
-.delete(deleteContact); // 삭제하기 
+.get(checkLogin, getContact) //수정하기 
+.put(checkLogin, updateContact)
+.delete(checkLogin, deleteContact); // 삭제하기 
 
 module.exports = router;
