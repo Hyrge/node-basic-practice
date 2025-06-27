@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const cookieParser = require("cookie-parser");
-const checkLogin = require("../middleware/checkLogin");
+const checkLogin = require("../middlewares/checkLogin");
 
 const {
   getAllContacts,
