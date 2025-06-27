@@ -1,25 +1,31 @@
-// 웹 서버 실행
+// 서버 생성
+require("dotenv").config();
 const express = require("express");
-const dbConnect = require("./config/dbConnect");
-const methodOverride = require("method-override");
-const app = express();  // 앱서버 생성
-const port = 3000;      // 포트번호 지정
-   
-app.set("view engine", "ejs"); //템플릿 엔진을 사용하겠다
-app.set("views", "./views"); //템플릿 파일이 있는 경로설정
-app.use(express.static("./public")); // 정적 html 설정
-app.use(methodOverride("_method"))
+const expressLayouts = require("express-ejs-layouts");
+const connectDb = require("./config/db");
+const cookieParser = require("cookie-parser");
+const  methodOverride = require("method-override");
 
-dbConnect();
+const app = express();  
+const port = process.env.PORT || 3000;
+
+connectDb();
+
+app.use(expressLayouts);
+app.set("view engine", "ejs");
+app.set("views", "./views");
+
+app.use(express.static("public"));
+
 app.use(express.json());
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded( {extended: true} ));
 
+app.use(cookieParser());
+app.use(methodOverride("_method"));
 
 app.use("/", require("./routes/main"));
-// app.use("/contacts", require("./routes/contactRoutes"));
+app.use("/", require("./routes/admin"));
 
-
-// 서버 실행
 app.listen(port, () => {
-  console.log(`${port}번 포트에서 서버 실행 중`);
-}); 
+  console.log(`App listening on port  ${port}`);
+});
